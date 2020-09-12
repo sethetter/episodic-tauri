@@ -3,6 +3,7 @@ use yew::prelude::*;
 use components::app::App as AppComponent;
 
 mod components;
+mod data;
 
 #[wasm_bindgen(start)]
 pub fn run_app() {

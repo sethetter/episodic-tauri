@@ -1,5 +1,5 @@
 use yew::prelude::*;
-use crate::components::app::Show;
+use crate::data::Show;
 
 pub struct ShowList {
     link: ComponentLink<Self>,

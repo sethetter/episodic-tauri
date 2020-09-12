@@ -1,23 +1,17 @@
 use yew::prelude::*;
-use crate::components::show_list::ShowList;
+use crate::{
+    components::{
+        show_list::ShowList,
+        watch_list::WatchList,
+    },
+    data::{Show, WatchItem},
+};
 
 pub struct App {
     link: ComponentLink<Self>,
     value: i64,
     shows: Vec<Show>,
     watch_list: Vec<WatchItem>,
-}
-
-#[derive(Clone)]
-pub struct Show {
-    pub tmdb_id: u32,
-    pub name: String,
-}
-
-pub struct WatchItem {
-    pub name: String,
-    pub show: Option<Show>,
-    pub season: Option<u32>,
 }
 
 pub enum Msg {
@@ -30,10 +24,11 @@ impl Component for App {
 
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         let show = Show { tmdb_id: 0, name: "Righteous Gemstones".into() };
+
         let shows = vec![show.clone()];
         let watch_list = vec![
             WatchItem {
-                name: "Righteous Gemstones".into(),
+                name: "Righteous Gemstones (S01E01)".into(),
                 show: Some(show.clone()),
                 season: Some(1),
             },
@@ -57,17 +52,10 @@ impl Component for App {
     }
 
     fn view(&self) -> Html {
-        let render_watch_item = |i: &WatchItem| -> Html {
-            html! {
-                <li>{ &i.name }</li>
-            }
-        };
         html! {
             <div>
                 <ShowList shows={&self.shows} />
-                <ul class="watch_list">
-                    { self.watch_list.iter().map(render_watch_item).collect::<Html>() }
-                </ul>
+                <WatchList items={&self.watch_list} />
             </div>
         }
     }
