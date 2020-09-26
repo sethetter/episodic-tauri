@@ -37,7 +37,10 @@ impl Component for WatchList {
             }
         };
         html! {
-            <div>
+            <div class="w-1/2">
+                <h1 class="text-lg">{ "Watch List" }</h1>
+                <button>{ "Add" }</button>
+                <hr class="my-2 mr-4"/>
                 <ul class="watch-list">
                     { self.items.iter().map(render_item).collect::<Html>() }
                 </ul>

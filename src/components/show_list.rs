@@ -37,7 +37,9 @@ impl Component for ShowList {
             }
         };
         html! {
-            <div>
+            <div class="w-1/2">
+                <h1 class="text-lg">{ "Shows" }</h1>
+                <hr class="my-2 mr-4"/>
                 <ul class="shows">
                     { self.shows.iter().map(render_show).collect::<Html>() }
                 </ul>

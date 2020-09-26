@@ -4,7 +4,7 @@ use crate::{
         show_list::ShowList,
         watch_list::WatchList,
     },
-    data::{Show, WatchItem},
+    data::{self, Show, WatchItem},
 };
 
 pub struct App {
@@ -23,7 +23,13 @@ impl Component for App {
     type Properties = ();
 
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
-        let show = Show { tmdb_id: 0, name: "Righteous Gemstones".into() };
+        // data::load_data()
+        let show = Show {
+            tmdb_id: 0,
+            name: "Righteous Gemstones".into(),
+            current_season: 1,
+            current_episode: 8,
+        };
 
         let shows = vec![show.clone()];
         let watch_list = vec![
@@ -53,9 +59,14 @@ impl Component for App {
 
     fn view(&self) -> Html {
         html! {
-            <div>
-                <ShowList shows={&self.shows} />
-                <WatchList items={&self.watch_list} />
+            <div class="container w-100">
+                <header class="p-4 border-b-2">
+                    <h1 class="text-xl">{ "Episodic" }</h1>
+                </header>
+                <div class="flex-row flex p-4">
+                    <ShowList shows={ &self.shows } />
+                    <WatchList items={ &self.watch_list } />
+                </div>
             </div>
         }
     }
