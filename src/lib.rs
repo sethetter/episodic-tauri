@@ -7,11 +7,13 @@ use url::Url;
 mod components;
 mod data;
 mod tauri;
+mod tmdb;
 
 #[wasm_bindgen]
 pub async fn run_app() {
-    let url = Url::parse("https://sethetter.com").unwrap();
-    let resp = tauri::http::request_text(url, None).await;
-    console::log_1(&resp.unwrap().into());
+    let tmdb_client = tmdb::TmdbClient::new("874c5d5a093ae7e43035cd9a4bd4939c");
+    let resp = tmdb_client.search_tv("Righteous").await.unwrap();
+    let resp_json = serde_json::to_string(&resp).unwrap();
+    console::log_1(&resp_json.into());
     App::<AppComponent>::new().mount_to_body();
 }

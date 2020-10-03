@@ -1,6 +1,5 @@
 use wasm_bindgen::prelude::*;
-use js_sys::{JsString, Object, Reflect};
-use web_sys::console;
+use js_sys::{Object, Reflect};
 use url::Url;
 
 type Result<T> = std::result::Result<T, JsValue>;
